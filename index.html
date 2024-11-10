@@ -2,29 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Cross-Platform AR Web App</title>
+    <title>AR with Spline Integration</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar-nft.min.js"></script>
+    <style>
+        body { margin: 0; overflow: hidden; }
+        #ar-container { display: none; }
+    </style>
 </head>
-<body style="margin: 0; overflow: hidden;">
-    <!-- Button to start AR experience -->
+<body>
+
+    <!-- AR Button -->
     <button onclick="startAR()" style="position: fixed; top: 20px; left: 20px; z-index: 100; padding: 10px;">
         View in AR
     </button>
 
     <!-- AR Scene -->
-    <a-scene embedded arjs>
-        <!-- Marker (default is Hiro marker) -->
+    <a-scene embedded arjs id="ar-container">
+        <!-- Marker -->
         <a-marker preset="hiro">
-            <!-- Add 3D model -->
-            <a-box position="0 0.5 0" material="color: yellow;"></a-box>
+            <!-- Embed Spline Scene -->
+            <a-entity
+                geometry="primitive: plane; width: 2; height: 1" 
+                material="shader: flat; src: https://my.spline.design/untitled-9adbb60c9d3c08d2381b666467f9ff71/" 
+                position="0 0 0"
+                scale="0.5 0.5 0.5">
+            </a-entity>
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
 
     <script>
         function startAR() {
-            document.querySelector('a-scene').style.display = 'block';
+            document.getElementById('ar-container').style.display = 'block';
         }
     </script>
 </body>
